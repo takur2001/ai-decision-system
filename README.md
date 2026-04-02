@@ -6,7 +6,7 @@ An end-to-end AI-powered platform for fraud detection, risk scoring, and intelli
 
 ## 🔥 Live Demo
 
-- 🌐 Frontend: https://YOUR-STREAMLIT-URL
+- 🌐 Frontend: https://ai-decision-system-kvqfav59tmfhjgcmtvkskh.streamlit.app
 - ⚙️ Backend API: https://ai-decision-system-mw63.onrender.com
 - 📄 API Docs: https://ai-decision-system-mw63.onrender.com/docs
 
@@ -33,10 +33,13 @@ It includes:
 - SQLite
 - JWT Authentication
 - SQLAlchemy
+<img width="1919" height="975" alt="image" src="https://github.com/user-attachments/assets/39b12091-df09-42ad-93ec-6032832dd4e7" />
 
 ### Frontend
 - Streamlit
 - Plotly (visualizations)
+<img width="1919" height="967" alt="image" src="https://github.com/user-attachments/assets/03c7b4c1-80d7-4814-b4e1-04c2c6f43eff" />
+<img width="1919" height="962" alt="image" src="https://github.com/user-attachments/assets/a08aaf39-325e-49f7-9463-e92c603c14e7" />
 
 ### Deployment
 - Render (Backend)
@@ -76,10 +79,8 @@ It includes:
   "text": "Unauthorized transaction of $5000 detected on March 28"
 }
 
----
 
 ## 📊 Example Output
-```json
 {
   "entities": {
     "amount": "$5000",
