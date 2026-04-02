@@ -38,7 +38,6 @@ It includes:
 ### Frontend
 - Streamlit
 - Plotly (visualizations)
-<img width="1919" height="967" alt="image" src="https://github.com/user-attachments/assets/03c7b4c1-80d7-4814-b4e1-04c2c6f43eff" />
 <img width="1919" height="962" alt="image" src="https://github.com/user-attachments/assets/a08aaf39-325e-49f7-9463-e92c603c14e7" />
 
 ### Deployment
@@ -52,6 +51,7 @@ It includes:
 ### Authentication
 - Signup & Login
 - JWT-based secure APIs
+<img width="1919" height="788" alt="image" src="https://github.com/user-attachments/assets/517cd2fb-4455-4b7d-95c9-06ca991ba86b" />
 
 ### Case Analysis
 - Analyze fraud-related text
@@ -64,7 +64,7 @@ It includes:
 - High-risk cases
 - Average risk score
 - Latest decision
-
+<img width="1919" height="967" alt="image" src="https://github.com/user-attachments/assets/03c7b4c1-80d7-4814-b4e1-04c2c6f43eff" />
 ### Case History
 - User-specific data
 - Stored in database
