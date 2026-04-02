@@ -588,7 +588,7 @@ st.markdown("---")
 st.markdown(
     """
     <div style="text-align:center; color:#64748b; font-size:13px;">
-        Built by Karthik • AI Decision Intelligence System • 2026
+        Built by Karthik Chalamalasetty • AI Decision Intelligence System • 2026
     </div>
     """,
     unsafe_allow_html=True,
