@@ -117,13 +117,20 @@ User Input → Streamlit UI → FastAPI Backend → AI Processing Engine → Dat
 
 ## 📸 Screenshots
 
+###🔧 Backend
+
+<img width="1919" height="966" alt="image" src="https://github.com/user-attachments/assets/1b86b26f-0513-4806-9483-863b8f14e327" />
+
 ### 🔐 Login Page
 
-(Add image here)
+<img width="1919" height="692" alt="image" src="https://github.com/user-attachments/assets/852ba7ee-ed78-40cd-b137-b041e703e2ed" />
+
 
 ### 📊 Dashboard
 
-(Add image here)
+<img width="1919" height="907" alt="image" src="https://github.com/user-attachments/assets/4c1ac38e-3fdf-4237-8f4b-ae19992829ec" />
+<img width="1919" height="963" alt="image" src="https://github.com/user-attachments/assets/be0ee5f7-2969-4c1f-a651-2b289d250ec2" />
+
 
 ---
 
