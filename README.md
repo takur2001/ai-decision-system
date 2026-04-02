@@ -76,8 +76,10 @@ It includes:
   "text": "Unauthorized transaction of $5000 detected on March 28"
 }
 
-## 📊 Example Output
+---
 
+## 📊 Example Output
+```json
 {
   "entities": {
     "amount": "$5000",
