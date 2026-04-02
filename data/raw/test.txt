@@ -1,0 +1,4 @@
+Customer reported a suspicious transaction of $2500.
+The transaction happened on March 28.
+User claims it was unauthorized.
+Possible fraud case.
