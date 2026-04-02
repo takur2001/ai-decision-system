@@ -170,4 +170,7 @@ streamlit run dashboard.py
 **Karthik Chalamalasetty**
 AI Engineer | Data Scientist
 
----
+* 🌐 Portfolio: https://karthikchalamalasetty.netlify.app
+* 💼 LinkedIn: https://linkedin.com/in/karthik-chalamalasetty
+* 🧑‍💻 GitHub: https://github.com/takur2001
+
