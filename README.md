@@ -6,7 +6,7 @@ An end-to-end AI-powered platform for **fraud detection, risk scoring, and intel
 
 ## 🔥 Live Demo
 
-* 🌐 **Frontend**: https://ai-decision-system-kvqfav59tmfhjgcmtvkskh.streamlit.app
+* 🌐 **Frontend**: https://karthik-ai-decision-system.streamlit.app/
 * ⚙️ **Backend API**: https://ai-decision-system-mw63.onrender.com
 * 📄 **API Docs**: https://ai-decision-system-mw63.onrender.com/docs
 
@@ -172,5 +172,4 @@ AI Engineer | Data Scientist
 
 * 🌐 Portfolio: https://karthikchalamalasetty.netlify.app
 * 💼 LinkedIn: https://linkedin.com/in/karthik-chalamalasetty
-* 🧑‍💻 GitHub: https://github.com/takur2001
 
