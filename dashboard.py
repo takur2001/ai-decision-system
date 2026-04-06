@@ -19,7 +19,6 @@ API_URL = st.secrets.get(
 
 REQUEST_TIMEOUT = 60
 
-
 # ---------------- SESSION STATE ----------------
 DEFAULT_SESSION_VALUES = {
     "token": None,
@@ -33,7 +32,6 @@ DEFAULT_SESSION_VALUES = {
 for key, value in DEFAULT_SESSION_VALUES.items():
     if key not in st.session_state:
         st.session_state[key] = value
-
 
 # ---------------- STYLES ----------------
 st.markdown(
@@ -112,11 +110,6 @@ st.markdown(
         margin-bottom: 14px;
     }
 
-    .small-muted {
-        color: #94a3b8;
-        font-size: 13px;
-    }
-
     .case-box {
         background: rgba(255,255,255,0.03);
         border: 1px solid rgba(255,255,255,0.08);
@@ -160,7 +153,6 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
 
 # ---------------- HELPERS ----------------
 def risk_badge(level: str) -> str:
@@ -233,6 +225,26 @@ def login_user(email: str, password: str):
         return {"error": str(e)}
 
 
+def signup_user(email: str, password: str):
+    try:
+        response = requests.post(
+            f"{API_URL}/auth/signup",
+            json={"email": email, "password": password},
+            timeout=REQUEST_TIMEOUT,
+        )
+
+        if response.status_code == 200:
+            return response.json()
+
+        try:
+            return {"error": response.json()}
+        except Exception:
+            return {"error": response.text}
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
 @st.cache_data(ttl=30)
 def fetch_history_cached(token: str):
     response = requests.get(
@@ -274,14 +286,14 @@ def load_history_into_state() -> None:
         st.session_state.history_error = f"Failed to load history: {e}"
 
 
-# ---------------- LOGIN SCREEN ----------------
+# ---------------- LOGIN / SIGNUP SCREEN ----------------
 if not st.session_state.token:
     st.markdown(
         """
         <div class="header-container">
-            <div class="header-title">🔐 AI Decision System Login</div>
+            <div class="header-title">🔐 AI Decision System Access</div>
             <div class="header-subtitle">
-                Sign in to access fraud analysis, case history, and dashboard analytics.
+                Sign in or create an account to access fraud analysis, case history, and dashboard analytics.
             </div>
         </div>
         """,
@@ -294,35 +306,66 @@ if not st.session_state.token:
     else:
         st.warning("Backend waking up or temporarily unavailable. If using Render free tier, wait 30–60 seconds and try again.")
 
-    st.markdown('<div class="section-card">', unsafe_allow_html=True)
-    email = st.text_input("Email")
-    password = st.text_input("Password", type="password")
+    login_tab, signup_tab = st.tabs(["Login", "Sign Up"])
 
-    if st.button("Login"):
-        with st.spinner("Signing in..."):
-            result = login_user(email, password)
+    with login_tab:
+        st.markdown('<div class="section-card">', unsafe_allow_html=True)
+        login_email = st.text_input("Email", key="login_email")
+        login_password = st.text_input("Password", type="password", key="login_password")
 
-        if result and "access_token" in result:
-            st.session_state.token = result["access_token"]
-            st.session_state.user_email = result.get("email", email)
-            fetch_history_cached.clear()
-            load_history_into_state()
-            st.success("Login successful")
-            st.rerun()
-        else:
-            err = result.get("error") if isinstance(result, dict) else "Login failed"
+        if st.button("Login", key="login_button"):
+            with st.spinner("Signing in..."):
+                result = login_user(login_email, login_password)
 
-            if "Read timed out" in str(err):
-                st.warning("Backend is waking up on Render. Wait 30–60 seconds and click Login again.")
-            elif "127.0.0.1" in str(err):
-                st.error("Frontend is still pointing to localhost. Update API_URL to your deployed backend URL.")
+            if result and "access_token" in result:
+                st.session_state.token = result["access_token"]
+                st.session_state.user_email = result.get("email", login_email)
+                fetch_history_cached.clear()
+                load_history_into_state()
+                st.success("Login successful")
+                st.rerun()
             else:
-                st.error("Invalid credentials")
-                st.caption(f"Debug: {err}")
+                err = result.get("error") if isinstance(result, dict) else "Login failed"
 
-    st.markdown("</div>", unsafe_allow_html=True)
+                if "Read timed out" in str(err):
+                    st.warning("Backend is waking up on Render. Wait 30–60 seconds and click Login again.")
+                elif "127.0.0.1" in str(err):
+                    st.error("Frontend is still pointing to localhost. Update API_URL to your deployed backend URL.")
+                else:
+                    st.error("Invalid credentials")
+                    st.caption(f"Debug: {err}")
+
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    with signup_tab:
+        st.markdown('<div class="section-card">', unsafe_allow_html=True)
+        signup_email = st.text_input("Create Email", key="signup_email")
+        signup_password = st.text_input("Create Password", type="password", key="signup_password")
+        confirm_password = st.text_input("Confirm Password", type="password", key="confirm_password")
+
+        if st.button("Create Account", key="signup_button"):
+            if not signup_email or not signup_password:
+                st.warning("Please fill in email and password.")
+            elif signup_password != confirm_password:
+                st.error("Passwords do not match.")
+            else:
+                with st.spinner("Creating account..."):
+                    result = signup_user(signup_email, signup_password)
+
+                if result and "message" in result:
+                    st.success("Account created successfully. Please log in from the Login tab.")
+                else:
+                    err = result.get("error") if isinstance(result, dict) else "Signup failed"
+
+                    if "Read timed out" in str(err):
+                        st.warning("Backend is waking up on Render. Wait 30–60 seconds and try again.")
+                    else:
+                        st.error("Could not create account.")
+                        st.caption(f"Debug: {err}")
+
+        st.markdown("</div>", unsafe_allow_html=True)
+
     st.stop()
-
 
 # ---------------- MAIN APP ----------------
 if not st.session_state.history_data and st.session_state.history_error is None:
@@ -588,7 +631,7 @@ st.markdown("---")
 st.markdown(
     """
     <div style="text-align:center; color:#64748b; font-size:13px;">
-        Built by Karthik Chalamalasetty • AI Decision Intelligence System • 2026
+        Built by Karthik • AI Decision Intelligence System • 2026
     </div>
     """,
     unsafe_allow_html=True,
